@@ -12,9 +12,16 @@ import pandas as pd
 def clean_data():
 
     df = pd.read_csv("solicitudes_credito.csv", sep=";")
+    dftmp = df.copy()
 
-    #
-    # Inserte su código aquí
-    #
+    # Campo Sexo
+    dftmp.sexo = dftmp.sexo.apply(lambda c: c.lower())
+    dftmp.sexo = dftmp.sexo.astype('category')
 
-    return df
+    # Campo Tipo de emprendimiento
+    dftmp.tipo_de_emprendimiento = dftmp.tipo_de_emprendimiento.astype('category')
+    dftmp.tipo_de_emprendimiento = dftmp.tipo_de_emprendimiento.apply(lambda c: c.lower())
+    dftmp.tipo_de_emprendimiento = dftmp.tipo_de_emprendimiento.astype('category')
+
+
+    return dftmp
